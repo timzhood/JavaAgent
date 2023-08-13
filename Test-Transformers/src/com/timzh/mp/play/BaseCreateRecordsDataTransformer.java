@@ -17,13 +17,13 @@ BaseDataTransformer<X, Y>
     }
 
     @Override
-    public X makeXfromY(final Y source) throws ReflectiveOperationException
+    public X makeXfromY(final Y source)
     {
         return makeNewRecord(this.ourYclass, this.ourXclass, source);
     }
 
     @Override
-    public Y makeYfromX(final X source) throws ReflectiveOperationException
+    public Y makeYfromX(final X source)
     {
         return makeNewRecord(this.ourXclass, this.ourYclass, source);
     }

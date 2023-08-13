@@ -17,7 +17,7 @@ public class TestJimDataTransformer001002
     }
 
     @Test
-    public void testMakeXfromY() throws ReflectiveOperationException
+    public void testMakeXfromY()
     {
         final JimDataTransformer001002 transformer = new JimDataTransformer001002();
         Assert.assertNotNull(transformer);
@@ -33,7 +33,7 @@ public class TestJimDataTransformer001002
     }
 
     @Test
-    public void testMakeYfromX() throws ReflectiveOperationException
+    public void testMakeYfromX()
     {
         final JimDataTransformer001002 transformer = new JimDataTransformer001002();
         Assert.assertNotNull(transformer);

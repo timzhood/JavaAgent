@@ -10,9 +10,9 @@ public abstract class BaseDataTransformer<X extends TymRecord<X>, Y extends TymR
         super();
     }
 
-    public abstract X makeXfromY(final Y source) throws ReflectiveOperationException;
+    public abstract X makeXfromY(final Y source);
 
-    public abstract Y makeYfromX(final X source) throws ReflectiveOperationException;
+    public abstract Y makeYfromX(final X source);
 
     /**
      * @param <X>
@@ -71,6 +71,9 @@ public abstract class BaseDataTransformer<X extends TymRecord<X>, Y extends TymR
                 e.printStackTrace();
             }
         }
+
+        // FIXME: Need to decide what to return when errors occur?
+        // At moment will be null but maybe should raise our own exception.
 
         return newRecord;
     }
