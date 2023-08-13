@@ -40,6 +40,12 @@ public abstract class BaseDataTransformer<X extends TymRecord<X>, Y extends TymR
             }
         }
 
+        if (ctor.isEmpty())
+        {
+            // FIXME: Use logger.
+            System.err.println("failed to find constructor.");
+        }
+
         return ctor;
     }
 
@@ -67,7 +73,6 @@ public abstract class BaseDataTransformer<X extends TymRecord<X>, Y extends TymR
             }
             catch (final ReflectiveOperationException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
