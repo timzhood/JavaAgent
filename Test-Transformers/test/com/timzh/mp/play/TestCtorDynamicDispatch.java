@@ -6,7 +6,6 @@ import org.junit.Test;
 public class TestCtorDynamicDispatch
 {
 
-    @SuppressWarnings("unused")
     @Test
     public void test()
     {
