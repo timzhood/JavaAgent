@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,10 +27,16 @@ public class TestCopying
         jim1.setField002(Integer.valueOf(2));
         jim1.setId("jim1");
         jim1.setKey(Integer.valueOf(3));
+
         final List<String> names = new ArrayList<>();
         names.add("tim");
         names.add("hood");
         jim1.setNames(names);
+
+        final Map<String, Integer> ages = new HashMap<>();
+        ages.put("tim hood", Integer.valueOf(60));
+        jim1.setAges(ages);
+
         jim1.setStrangeKey(Integer.valueOf(4));
 
         final JimRecord002 jim2 = new JimRecord002();
@@ -43,24 +50,32 @@ public class TestCopying
         assertEquals(4, jim2.getStrangeKey().intValue());
 
         assertTrue(names != jim2.getNames());
-        System.out.println(jim2.getNames());
         assertTrue(Arrays.asList("tim", "hood").equals(jim2.getNames()));
+
+        assertTrue(ages != jim2.getAges());
+        final Map<String, Integer> ages2 = new HashMap<>();
+        ages2.put("tim hood", Integer.valueOf(60));
+        assertTrue(ages2.equals(jim2.getAges()));
     }
 
+    /**
+     * Deep copy Java Beans, see definition https://en.wikipedia.org/wiki/JavaBeans.
+     *
+     * @param orig - copy from this object
+     * @param dest - to this object
+     * @throws ReflectiveOperationException - thrown if something goes wrong
+     */
     private static void deepCopy(final Object orig, final Object dest)
             throws ReflectiveOperationException
     {
-        final PropertyDescriptor[] origDescriptors = PropertyUtils.getPropertyDescriptors(orig);
-        for (final PropertyDescriptor origDescriptor : origDescriptors)
+        for (final PropertyDescriptor origDescriptor : PropertyUtils.getPropertyDescriptors(orig))
         {
             final String name = origDescriptor.getName();
 
             if (PropertyUtils.isReadable(orig, name) && PropertyUtils.isWriteable(dest, name))
             {
                 final Class<?> type = origDescriptor.getPropertyType();
-
                 final Object value = PropertyUtils.getSimpleProperty(orig, name);
-                System.out.println(name + "-" + type + "-" + value);
 
                 if (ClassUtils.isPrimitiveOrWrapper(type) || isImmutable(value))
                 {
@@ -113,7 +128,7 @@ public class TestCopying
         @SuppressWarnings("unchecked")
         final Map<Object, Object> oldMap = (Map<Object, Object>) value;
 
-        // FIXME: Check that this creates the same kind of map...
+        // FIXME: Check this creates the same kind of map and can we pre-size the map ?
         final Map<Object, Object> newMap = oldMap.getClass().getDeclaredConstructor().newInstance();
 
         // FIXME: Can I assume keys are immutable ?
