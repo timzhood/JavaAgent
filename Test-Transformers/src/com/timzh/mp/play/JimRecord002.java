@@ -48,4 +48,10 @@ BaseJimRecord002<JimRecord002>
         return result;
     }
 
+    @Override
+    protected BaseBobRecord001 newBob()
+    {
+        return new BobRecord002();
+    }
+
 }

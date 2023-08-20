@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="libs/guava-32.1.2-jre.jar"/>
 	<classpathentry kind="lib" path="libs/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.13.0.jar" sourcepath="libs/commons-lang3-3.13.0-sources.jar"/>
+	<classpathentry kind="lib" path="libs/commons-collections-3.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
