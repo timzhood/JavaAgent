@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  *
@@ -14,6 +13,8 @@ import java.util.Scanner;
 @NonNls
 final class Lox
 {
+
+    private static boolean hadError = false;
 
     private Lox()
     {
@@ -41,11 +42,22 @@ final class Lox
     {
         try (final Scanner scanner = new Scanner(source))
         {
-//            for (Token token : scanner.scanTokens())
-//            {
-//                System.out.println(token);
-//            }
+            for (final Token token : scanner.scanTokens())
+            {
+                System.out.println(token);
+            }
         }
+    }
+
+    private static void error(final int line, final String message)
+    {
+        Lox.report(line, "", message);
+    }
+
+    private static void report(final int line, final String where, final String message)
+    {
+        System.err.println("[line " + line + "] Error" + where + ": " + message);
+        Lox.hadError = true;
     }
 
 }
