@@ -18,4 +18,10 @@ public final class JimRecord001 extends BaseJimRecord001<JimRecord001>
         return new JimRecord001(this);
     }
 
+    @Override
+    protected BaseBobRecord001 newBob()
+    {
+        return new BobRecord001();
+    }
+
 }
