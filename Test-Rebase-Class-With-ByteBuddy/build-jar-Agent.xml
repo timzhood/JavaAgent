@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     4 Jul 2023 21:06:24                                                        
+
+     project    
+     description
+                   
+     timzh                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+	<description>
+            description
+    </description>
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default">
+		<jar destfile="c:/temp/rebaseagent.jar" basedir="bin">
+			<zipfileset includes="**/*.class" src="../Test-ByteBuddy-Agent/libs/byte-buddy-1.14.5.jar" />
+			<manifest>
+				<attribute name="Premain-Class" value="test.rebaseagent.Agent" />
+			</manifest>
+		</jar>
+	</target>
+
+</project>

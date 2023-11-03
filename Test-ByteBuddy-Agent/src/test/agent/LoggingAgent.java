@@ -13,21 +13,22 @@ import test.support.ToString;
 
 public class LoggingAgent
 {
-    public static void premain(String arguments, Instrumentation instrumentation)
+    public static void premain(@SuppressWarnings("unused") final String arguments,
+            final Instrumentation instrumentation)
     {
         System.out.println("premain running ...");
 
         new AgentBuilder.Default().type(ElementMatchers.isAnnotatedWith(ToString.class))
-                .transform(new AgentBuilder.Transformer()
-                {
-                    @Override
-                    public Builder<?> transform(Builder<?> builder, TypeDescription typeDescription,
-                            ClassLoader classLoader, JavaModule module, ProtectionDomain protectionDomain)
-                    {
-                        return builder.method(ElementMatchers.named("toString"))
-                                .intercept(MethodDelegation.to(LoggerInterceptor.class));
-                    }
-                }).installOn(instrumentation);
+        .transform(new AgentBuilder.Transformer()
+        {
+            @Override
+            public Builder<?> transform(final Builder<?> builder, final TypeDescription typeDescription,
+                    final ClassLoader classLoader, final JavaModule module, final ProtectionDomain protectionDomain)
+            {
+                return builder.method(ElementMatchers.named("toString"))
+                        .intercept(MethodDelegation.to(LoggerInterceptor.class));
+            }
+        }).installOn(instrumentation);
 
         System.out.println("premain finished");
     }
