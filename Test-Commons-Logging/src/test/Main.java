@@ -14,12 +14,20 @@ public class Main
 
     public static void main(final String[] args)
     {
-        System.out.println("Hello");
+        System.out.println("Hello, setting property...");
+
+        System.setProperty("org.apache.commons.logging.diagnostics.dest", "STDOUT");
+
+        System.out.println("Property has been set., configuring log4j...");
 
         BasicConfigurator.configure();
         PropertyConfigurator.configure("config/log4j.properties");
 
+        System.out.println("Configured log4j, getting JCL log...");
+
         final Log log = LogFactory.getLog(Main.class);
+
+        System.out.println("Got JCL log, printing stuff in-use...");
 
         System.out.println(LogFactory.getFactory());
         System.out.println(log);
