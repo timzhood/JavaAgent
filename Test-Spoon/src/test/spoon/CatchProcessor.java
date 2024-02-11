@@ -51,7 +51,7 @@ public class CatchProcessor
         }
         catch (final Exception e)
         {
-
+            e.printStackTrace();
         }
     }
 }
